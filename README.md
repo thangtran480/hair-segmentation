@@ -1,4 +1,4 @@
-# Hair Segmentation using Keras
+# Hair Segmentation Realtime using Keras
 
 The architecture was inspired by [Real-time deep hair matting on mobile devices](https://arxiv.org/pdf/1712.07168.pdf)
 
@@ -15,6 +15,7 @@ scikit-image==0.15.0
 ```
 ## Dataset
 
+* [CebelA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
 * [Figaro-1k](http://projects.i-ctm.eu/it/progetto/figaro-1k)
 * [Lft](http://vis-www.cs.umass.edu/lfw/)
 
@@ -51,3 +52,8 @@ runs seamlessly on CPU and GPU.
 Read the documentation [Keras.io](http://keras.io/)
 
 Keras is compatible with: Python 3.6.
+
+## TODO
+- [x] Implement model using Keras 
+- [x] Convert model to Tensorflow Lite
+- [ ] Implement model to Android
