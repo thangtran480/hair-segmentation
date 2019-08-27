@@ -1,10 +1,9 @@
-import keras
-import skimage.io as io
-import skimage.transform as trans
-import numpy as np
-import cv2
-import time
 import glob
+import time
+
+import cv2
+import keras
+import numpy as np
 
 
 def predict(image, height=224, width=224):
@@ -39,7 +38,7 @@ def transfer(image, mask):
 
 if __name__ == '__main__':
 
-    model = keras.models.load_model('models/hairnet_matting3.hdf5')
+    model = keras.models.load_model('models/hairnet_matting.hdf5')
 
     for name in glob.glob('test/images/*.jpg'):
         img = cv2.imread(name)

@@ -1,12 +1,30 @@
+import argparse
+
 from keras.callbacks import ModelCheckpoint
-import keras 
+import keras
+from keras.optimizers import Adam
+
 from data.load_data import trainGenerator
 from nets import Hairnet
 
-if __name__ == '__main__':
-    BATCH_SIZE = 4
-    DATA_PATH = 'data/'
 
+def get_args():
+    parser = argparse.ArgumentParser(description='Hair Segmentation')
+    parser.add_argument('--data_dir', default='./data/')
+    parser.add_argument('--batch_size', type=int, default=4)
+    parser.add_argument('--epochs', default=5, type=int)
+    parser.add_argument('--lr', default=0.0001, type=float)
+    parser.add_argument('--img_size', type=int, default=256)
+    parser.add_argument('--use_pretrained', type=bool, default=True)
+    args = parser.parse_args()
+
+    return args
+
+
+if __name__ == '__main__':
+    args = get_args()
+
+    # Augmentation Data
     data_gen_args = dict(rotation_range=0.2,
                          width_shift_range=0.05,
                          height_shift_range=0.05,
@@ -14,15 +32,18 @@ if __name__ == '__main__':
                          zoom_range=0.05,
                          horizontal_flip=True,
                          fill_mode='nearest')
-    myGene = trainGenerator(BATCH_SIZE, DATA_PATH, 'image', 'label', data_gen_args,
-                            save_to_dir=None)
+    
+    myGene = trainGenerator(args.batch_size, args.data_dir, 'image', 'label', data_gen_args, save_to_dir=None)
 
-	model = Hairnet.get_model()
-	
-	# Pretrain model 
-    # model = keras.models.load_model('hairnet_matting3.hdf5')
+    if args.use_pretrained:
+        # Pretrain model
+        model = keras.models.load_model('models/hairnet_matting.hdf5')
+    else:
+        model = Hairnet.get_model()
 
-    model.compile(optimizer=Adam(lr=1e-4), loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=Adam(lr=args.lr), loss='binary_crossentropy', metrics=['accuracy'])
 
-    model_checkpoint = ModelCheckpoint('hairnet_matting.hdf5', monitor='loss', verbose=1, save_best_only=True)
-    model.fit_generator(myGene, callbacks=[model_checkpoint], steps_per_epoch=2000, epochs=30)
+    model_checkpoint = ModelCheckpoint('models/hairnet_matting.hdf5', monitor='loss', verbose=1, save_best_only=True)
+    model.fit_generator(myGene, callbacks=[model_checkpoint], steps_per_epoch=2000, epochs=args.epochs)
+
+    model.save('models/hair.h5')
