@@ -23,22 +23,39 @@ I've downloaded it and done the pre-processing. You find it in folder data/image
 
 ## Train model 
 
-```
+```shell script
 # You can config train model in train.py
 python train.py
 ```
 
 ## Predict model
-```
+```shell script
 # Run test.py
 python test.py
 ```
 You will see the predicted results of test image in test/data
 
 ## Result
-![original](test/images/00041.jpg)
-![result](test/outs/00041.jpg)
+![original](assets/input1.jpg)
+![result](assets/output1.jpg)
 
+![original](assets/input2.jpg)
+![result](assets/output2.jpg)
+
+![original](assets/input3.jpg)
+![result](assets/output3.jpg)
+
+## Convert to Tensorflow Lite
+- Convert 
+```shell script
+# Convert Model to Mobile
+python convert_to_tflite.py
+```
+- Show shape model tflite
+```shell script
+# Shape input and output shape model tflite 
+python shape_input_output_tflite.py
+```
 ## About Keras
 
 Keras is a minimalist, highly modular neural networks library, written in Python and capable of running on top of either TensorFlow or Theano. It was developed with a focus on enabling fast experimentation. Being able to go from idea to result with the least possible delay is key to doing good research.
