@@ -19,6 +19,21 @@ scikit-image==0.15.0
 * [Figaro-1k](http://projects.i-ctm.eu/it/progetto/figaro-1k)
 * [Lft](http://vis-www.cs.umass.edu/lfw/)
 
+### Data structure
+```
+├── my-data
+│   ├── image
+│   │   ├── 1.jpg
+│   │   ├── 2.jpg
+│   │   ├── 3.jpg
+...
+│   ├── label
+│   │   ├── 1.jpg
+│   │   ├── 2.jpg
+│   │   ├── 3.jpg
+...
+```
+
 I've downloaded it and done the pre-processing. You find it in folder data/image (images original) and data/label(images mask)
 
 ## Train model 
