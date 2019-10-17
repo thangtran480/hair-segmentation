@@ -7,6 +7,8 @@ from keras.optimizers import Adam
 from data.load_data import trainGenerator
 from nets import Hairnet
 
+import os
+
 
 def get_args():
     parser = argparse.ArgumentParser(description='Hair Segmentation')
@@ -15,7 +17,8 @@ def get_args():
     parser.add_argument('--epochs', default=5, type=int)
     parser.add_argument('--lr', default=0.0001, type=float)
     parser.add_argument('--img_size', type=int, default=256)
-    parser.add_argument('--use_pretrained', type=bool, default=True)
+    parser.add_argument('--use_pretrained', type=bool, default=False)
+    parser.add_argument('--path_model', default='models/hair.h5')
     args = parser.parse_args()
 
     return args
@@ -33,7 +36,13 @@ if __name__ == '__main__':
                          horizontal_flip=True,
                          fill_mode='nearest')
     
-    myGene = trainGenerator(args.batch_size, args.data_dir, 'image', 'label', data_gen_args, save_to_dir=None)
+    myGene = trainGenerator(args.batch_size, args.data_dir, 'images', 'masks', data_gen_args, save_to_dir=None)
+
+    size_data = len(os.listdir(f"{args.data_dir}/images"))
+    steps_per_epoch = size_data // args.batch_size
+    args.steps_per_epoch = steps_per_epoch
+
+    print(args)
 
     if args.use_pretrained:
         # Pretrain model
@@ -44,6 +53,6 @@ if __name__ == '__main__':
     model.compile(optimizer=Adam(lr=args.lr), loss='binary_crossentropy', metrics=['accuracy'])
 
     model_checkpoint = ModelCheckpoint('models/hairnet_matting.hdf5', monitor='loss', verbose=1, save_best_only=True)
-    model.fit_generator(myGene, callbacks=[model_checkpoint], steps_per_epoch=2000, epochs=args.epochs)
+    model.fit_generator(myGene, callbacks=[model_checkpoint], steps_per_epoch= args.steps_per_epoch, epochs=args.epochs)
 
-    model.save('models/hair.h5')
+    model.save(args.path_model)

@@ -15,25 +15,24 @@ scikit-image==0.15.0
 ```
 ## Dataset
 
-* [CebelA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
+* [CelebAMask-HQ](https://github.com/switchablenorms/CelebAMask-HQ) (contain 29.300 image and mask hair segmentation)
 * [Figaro-1k](http://projects.i-ctm.eu/it/progetto/figaro-1k)
 * [Lft](http://vis-www.cs.umass.edu/lfw/)
 
-### Data structure
+## Data structure training
 ```
 ├── my-data
-│   ├── image
+│   ├── images
 │   │   ├── 1.jpg
 │   │   ├── 2.jpg
 │   │   ├── 3.jpg
 ...
-│   ├── label
+│   ├── masks
 │   │   ├── 1.jpg
 │   │   ├── 2.jpg
 │   │   ├── 3.jpg
 ...
 ```
-
 I've downloaded it and done the pre-processing. You find it in folder data/image (images original) and data/label(images mask)
 
 ## Train model 
@@ -43,10 +42,16 @@ I've downloaded it and done the pre-processing. You find it in folder data/image
 python train.py
 ```
 
-## Predict model
+## Evaluate model
+
+```shell script
+python evaluate.py
+```
+
+## Run pretrain model
 ```shell script
 # Run test.py
-python test.py
+python demo.py
 ```
 You will see the predicted results of test image in test/data
 

@@ -155,3 +155,6 @@ ckpt/
 !.vscode/extensions.json
 
 *.zip
+
+data/images/*
+data/masks/*

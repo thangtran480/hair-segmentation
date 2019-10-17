@@ -84,6 +84,7 @@ def RedBlock(inputs, filters, kernel_size=(1, 1)):
     x = layers.Conv2D(filters=filters,
                       kernel_size=kernel_size,
                       strides=(1, 1),
+                    #   activation='softmax',
                       data_format=image_data_format)(inputs)
 
     return x
