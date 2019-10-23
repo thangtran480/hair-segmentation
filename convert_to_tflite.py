@@ -5,13 +5,13 @@ if __name__ == '__main__':
 
     tf.enable_eager_execution()
 
-    PATH_MODEL = "models/hairnet_matting.hdf5"
+    PATH_MODEL = "models/hair.h5"
     PATH_MODEL_TFLITE = "models/model_hairnet.tflite"
 
     converter = tf.lite.TFLiteConverter.from_keras_model_file(PATH_MODEL)
 
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
-    converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
+#     converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
 
     tflite_model = converter.convert()
     open(PATH_MODEL_TFLITE, "wb").write(tflite_model)
