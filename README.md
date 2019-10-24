@@ -93,7 +93,7 @@ Keras is compatible with: Python 3.6.
 ## TODO
 - [x] Implement model using Keras 
 - [x] Convert model to Tensorflow Lite
-- [ ] Implement model to Android (``Coming soon``)
+- [ ] Implement model to Android (``DOING``)
 
 ## License
 Copyright (c) 2019 Thang Tran Van
