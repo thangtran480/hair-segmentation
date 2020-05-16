@@ -15,7 +15,7 @@ scikit-image==0.15.0
 ```
 ## Dataset
 
-* [CelebAMask-HQ](https://github.com/switchablenorms/CelebAMask-HQ) (contain 29.300 image and mask hair segmentation)
+* [CelebAMask-HQ](https://github.com/switchablenorms/CelebAMask-HQ) (contain 29.300 images and masks hair segmentation)
 * [Figaro-1k](http://projects.i-ctm.eu/it/progetto/figaro-1k)
 * [Lft](http://vis-www.cs.umass.edu/lfw/)
 
@@ -33,7 +33,7 @@ scikit-image==0.15.0
 │   │   ├── 3.jpg
 ...
 ```
-I've downloaded it and done the pre-processing. You find it in folder data/image (images original) and data/label(images mask)
+I've downloaded it and done the pre-processing. You find it in folder data/image (original images) and data/label(mask images)
 
 ## Train model 
 
