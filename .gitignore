@@ -155,6 +155,7 @@ ckpt/
 !.vscode/extensions.json
 
 *.zip
-
-data/images/*
-data/masks/*
+data/train
+data/val
+data/test
+data/CelebAMask-HQ
