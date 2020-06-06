@@ -159,3 +159,4 @@ data/train
 data/val
 data/test
 data/CelebAMask-HQ
+checkpoints
