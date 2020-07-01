@@ -1,6 +1,6 @@
 import argparse
 
-from keras.callbacks import ModelCheckpoint, CSVLogger
+from keras.callbacks import ModelCheckpoint, CSVLogger, LearningRateScheduler
 import keras
 from keras import backend as K
 from keras.backend.tensorflow_backend import set_session
@@ -12,6 +12,7 @@ from data.load_data import dataGenerator
 from nets import Hairnet
 import datetime
 
+import math 
 import os
 
 def get_args():
@@ -19,7 +20,7 @@ def get_args():
     parser.add_argument('--data_dir', default='./data')
     parser.add_argument('--batch_size', type=int, default=4)
     parser.add_argument('--epochs', type=int, default=5)
-    parser.add_argument('--lr', default=0.0001, type=float)
+    parser.add_argument('--lr', default=0.001, type=float)
     parser.add_argument('--img_size', type=int, default=256)
     parser.add_argument('--use_pretrained', type=bool, default=False)
     parser.add_argument('--path_model', default='checkpoints')
@@ -51,6 +52,14 @@ def pathFolderCheckpoint(path_model):
     return path_model
 
 
+def step_decay(epoch):
+    initial_lrate = 0.001
+    drop = 0.5
+    epochs_drop = 10.0
+    lrate = initial_lrate * math.pow(drop, math.floor((1+epoch)/epochs_drop))
+    return lrate
+
+
 def getData(args):
      # Augmentation Data
     data_gen_args = dict(rotation_range=0.2,
@@ -76,8 +85,11 @@ def getModel(args):
 
 
 def getCallback(args):
+    
     model_checkpoint = ModelCheckpoint(os.path.join(args.path_model, 'checkpoint.hdf5'), monitor='loss', verbose=1, save_best_only=True)
     csv_logger = CSVLogger(os.path.join(args.path_model, "model_history_log.csv"), append=True)
+    
+    lrate = LearningRateScheduler(step_decay)
     
     return [model_checkpoint, csv_logger]
     
@@ -99,5 +111,5 @@ if __name__ == '__main__':
     
     callbacks = getCallback(args)
     
-    model.fit_generator(train_data, callbacks=callbacks, steps_per_epoch= args.steps_per_epoch, epochs=args.epochs, validation_data=val_data, validation_steps=100)
+    model.fit_generator(train_data, callbacks=callbacks, steps_per_epoch= args.steps_per_epoch, epochs=args.epochs, validation_data=val_data, validation_steps=50)
     
