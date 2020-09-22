@@ -71,7 +71,7 @@ if __name__ == '__main__':
 #     sess = tf.Session(config=config)
 #     set_session(sess)  # set this TensorFlow session as the default session for Keras        
 
-    model = keras.models.load_model('/data.local/thangtv/hair-segmentation/checkpoints/06-06-2020_21-36-26/checkpoint.hdf5')
+    model = keras.models.load_model('checkpoints/06-06-2020_21-36-26/checkpoint.hdf5')
     hog_face_detector = dlib.get_frontal_face_detector()
 
     for path_image in glob.glob('test/images/*'):
