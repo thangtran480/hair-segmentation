@@ -2,7 +2,7 @@
 
 The architecture was inspired by [Real-time deep hair matting on mobile devices](https://arxiv.org/pdf/1712.07168.pdf)
 
----
+[![Build Status](https://travis-ci.org/thangtran480/hair-segmentation.svg?branch=master)](https://travis-ci.org/thangtran480/hair-segmentation)
 
 ## Prerequisites
 python 3.6 tensorflow-gpu==1.13.1, opencv-python==4.1.0.25, Keras==2.2.4, numpy==1.16.4, scikit-image==0.15.0
