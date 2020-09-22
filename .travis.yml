@@ -3,12 +3,13 @@ python:
   - "3.6"      # current default Python on Travis CI
 # command to install dependencies
 install:
-  - pip install tensorflow-gpu==1.13.1
+  - pip install tensorflow==1.13.1
   - pip install opencv-python==4.1.0.25
   - pip install Keras==2.2.4
   - pip install numpy==1.16.4
   - pip install scikit-image==0.15.0
   - pip install dlib
+  
 # command to run tests
 script:
   - python main.py
