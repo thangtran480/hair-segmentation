@@ -8,6 +8,7 @@ install:
   - pip install Keras==2.2.4
   - pip install numpy==1.16.4
   - pip install scikit-image==0.15.0
+  - pip install dlib
 # command to run tests
 script:
   - python main.py
