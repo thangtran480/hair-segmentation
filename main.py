@@ -63,13 +63,13 @@ def transfer(image, mask):
 
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"]= "1"
+#     os.environ["CUDA_VISIBLE_DEVICES"]= "1"
     
-    config = tf.ConfigProto()
-    config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
-    config.log_device_placement = True  # to log device placement (on which device the operation ran)
-    sess = tf.Session(config=config)
-    set_session(sess)  # set this TensorFlow session as the default session for Keras        
+#     config = tf.ConfigProto()
+#     config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
+#     config.log_device_placement = True  # to log device placement (on which device the operation ran)
+#     sess = tf.Session(config=config)
+#     set_session(sess)  # set this TensorFlow session as the default session for Keras        
 
     model = keras.models.load_model('/data.local/thangtv/hair-segmentation/checkpoints/06-06-2020_21-36-26/checkpoint.hdf5')
     hog_face_detector = dlib.get_frontal_face_detector()
