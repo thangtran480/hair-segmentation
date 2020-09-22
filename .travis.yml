@@ -10,4 +10,4 @@ install:
   - pip install scikit-image==0.15.0
 # command to run tests
 script:
-  - python demo.py
+  - python main.py
